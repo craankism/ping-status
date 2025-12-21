@@ -17,6 +17,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	address := pinger.Statistics().Addr
 	ping := pinger.Statistics().AvgRtt // get send/receive/duplicate/rtt stats
-	fmt.Println(ping)
+	packetLoss := pinger.Statistics().PacketLoss
+	TTL := pinger.Statistics().TTLs
+	fmt.Printf("%-15s %s\n", "Website:", address)
+	fmt.Printf("%-15s %d ms\n", "Ping:", ping.Milliseconds())
+	fmt.Printf("%-15s %.2f%%\n", "Packet Loss:", packetLoss)
+	fmt.Printf("%-15s %v\n", "TTLs received:", TTL)
 }
